@@ -56,7 +56,7 @@ function markTaskAsComplete(taskId){
 }
 
 
-// Define a function to delete a task
+//Define a function to delete a task
 function deleteTask(taskId){
     const newTasks = tasks.filter(function(task){
         return task.id !== taskId
@@ -69,6 +69,9 @@ function deleteTask(taskId){
     completedtask.innerHTML = comptask;
     }
 }
+  
+  
+  
 
 // Define a function to add a task to the tasks array
 function addTask(task){
@@ -82,12 +85,15 @@ function addTask(task){
      }
 }
 
-// Define a function to show a notification to the user
-function showNotification(text){
-    // alert(text);
-    console.log(text)
-}
-
+//added toast for task completion confimation
+function showNotification(text) {
+    Toastify({
+        text: text,
+      duration: 2000, // 2 seconds
+      gravity: "top", // or "bottom"
+    }).showToast(text);
+  }
+  
 // Define a function to handle keypress and mousedown events on the input field
 function handleInputKeypress(e){
     if(e.key == 'Enter' || e.type == 'mousedown'){
@@ -101,7 +107,7 @@ function handleInputKeypress(e){
             id:Date.now().toString(),
             done:false
         }
-        addTaskInput.value = ''; // Use addTaskInput instead of e.target
+        addTaskInput.value = ''; 
         addTask(task);
     }
 }
@@ -110,7 +116,7 @@ function handleInputKeypress(e){
 
 function handleClickListener(e) {
     const target = e.target;
-    if (target.classList.contains('fa-trash')) { // Check for the class 'fa-trash'
+    if (target.classList.contains('fa-trash')) { //checking for class fa-trash
       const taskId = target.dataset.id;
       deleteTask(taskId);
       return;
@@ -150,7 +156,7 @@ function allclear(){
 
 function initializeApp(){
     document.addEventListener('click', handleClickListener);
-    button.addEventListener('mousedown', handleInputKeypress); // Change event listener to 'mousedown'
+    button.addEventListener('mousedown', handleInputKeypress); 
     completeall.addEventListener('click', allComplete);
     clearall.addEventListener('click', allclear);
     
@@ -164,9 +170,9 @@ initializeApp();
 
 
 // get filter links
-const allLink = document.getElementById('all');
-const remLink = document.getElementById('rem');
-const comLink = document.getElementById('com');
+const allLink = document.getElementById('all-tasks');
+const remLink = document.getElementById('rem-tasks');
+const comLink = document.getElementById('com-tasks');
 
 // add event listeners to filter links
 allLink.addEventListener('click', showAllTasks);
